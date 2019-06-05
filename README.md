@@ -2,18 +2,18 @@
 
 This project was generated with Spring Boot and Maven
 
-### Requirements
-Install dependecies
-```console
-mvn install
-```
-
 ### Configure datasource
 application.properties
 ```console
 spring.datasource.username
 spring.datasource.password
 spring.datasource.url
+```
+
+### Requirements
+Install dependecies
+```console
+mvn install
 ```
 
 ### Running the application
