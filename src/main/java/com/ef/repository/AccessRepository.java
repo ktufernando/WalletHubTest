@@ -14,15 +14,11 @@ import java.util.stream.Stream;
 @Repository
 public interface AccessRepository extends CrudRepository<Access, Long> {
 
-    @Query(value = "SELECT c.ip AS ip, c.count AS count FROM ( " +
-            "                SELECT " +
-            "                  a.ip AS ip, " +
-            "                  COUNT(a.ip) AS count " +
-            "                FROM access AS a " +
-            "                WHERE (a.date >= ?1 AND a.date <= ?2) " +
-            "                GROUP BY a.ip " +
-            "              ) AS c " +
-            "WHERE c.count >= ?3",
+    @Query(value = "SELECT ip AS ip, COUNT(ip) AS count " +
+            "              FROM access " +
+            "              WHERE date BETWEEN ?1 AND ?2 " +
+            "              GROUP BY ip " +
+            "              HAVING count >= ?3",
             nativeQuery = true)
     Stream<MatchedIp> findIpsFor(Timestamp start, Timestamp end, Integer threshold);
 
